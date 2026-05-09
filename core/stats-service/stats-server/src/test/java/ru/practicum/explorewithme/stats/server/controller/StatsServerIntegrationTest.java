@@ -155,4 +155,5 @@ public class StatsServerIntegrationTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(response.getBody()).contains("Validation error");
     }
+
 }
