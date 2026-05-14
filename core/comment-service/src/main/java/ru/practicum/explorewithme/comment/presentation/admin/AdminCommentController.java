@@ -2,22 +2,16 @@ package ru.practicum.explorewithme.comment.presentation.admin;
 
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.practicum.explorewithme.api.client.comment.dto.CommentAdminDto;
-import ru.practicum.explorewithme.comment.application.params.AdminCommentSearchParams;
 import ru.practicum.explorewithme.comment.application.CommentService;
+import ru.practicum.explorewithme.comment.application.params.AdminCommentSearchParams;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/comments")
@@ -37,7 +31,6 @@ public class AdminCommentController {
     }
 
     @PatchMapping("/{commentId}/restore")
-    @ResponseStatus(HttpStatus.OK)
     public CommentAdminDto restoreComment(@PathVariable @Positive Long commentId) {
         log.info("Admin: Received request to restore comment with Id: {}", commentId);
         CommentAdminDto restoredComment = commentService.restoreCommentByAdmin(commentId);
@@ -56,7 +49,6 @@ public class AdminCommentController {
      * @return Список CommentDto
      */
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public List<CommentAdminDto> getAllCommentsAdmin(
         @RequestParam(name = "userId", required = false) @Positive Long userId,
         @RequestParam(name = "eventId", required = false) @Positive Long eventId,

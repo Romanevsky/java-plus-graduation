@@ -1,7 +1,5 @@
 package ru.practicum.explorewithme.event.application;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +12,9 @@ import ru.practicum.explorewithme.event.domain.Category;
 import ru.practicum.explorewithme.event.domain.CategoryRepository;
 import ru.practicum.explorewithme.event.domain.EventRepository;
 import ru.practicum.explorewithme.event.infrastructure.mapper.CategoryMapper;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -68,7 +69,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<CategoryDto> getAllCategories(int from, int size) {
         return categoryRepository.findAll(from, size).stream()
                 .map(categoryMapper::toDto)
@@ -77,7 +77,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public CategoryDto getCategoryById(Long categoryId) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new EntityNotFoundException("Category", "Id", categoryId));
