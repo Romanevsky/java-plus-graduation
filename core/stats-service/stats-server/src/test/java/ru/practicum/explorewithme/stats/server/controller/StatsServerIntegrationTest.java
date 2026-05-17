@@ -1,7 +1,7 @@
 package ru.practicum.explorewithme.stats.server.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static ru.practicum.explorewithme.common.constants.DateTimeConstants.DATE_TIME_FORMATTER;
+import static ru.practicum.explorewithme.api.constants.DateTimeConstants.DATE_TIME_FORMATTER;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -155,5 +155,4 @@ public class StatsServerIntegrationTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(response.getBody()).contains("Validation error");
     }
-
 }
